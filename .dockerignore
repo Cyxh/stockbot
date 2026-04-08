@@ -1,0 +1,7 @@
+.data_cache/
+__pycache__/
+*.pyc
+.env
+equity_curve.png
+bot_trades.log
+.git/

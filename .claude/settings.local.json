@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(grep -rn \"market.*hour\\\\|hour.*market\\\\|datetime.now\\\\|timezone\\\\|pytz\\\\|tzinfo\" D:claudespacestockbot/*.py)",
+      "Bash(tasklist)",
+      "WebSearch",
+      "WebFetch(domain:antonio-velazquez-bustamante.medium.com)",
+      "WebFetch(domain:blog.quantinsti.com)",
+      "WebFetch(domain:www.venn.twosigma.com)",
+      "WebFetch(domain:www.ssga.com)",
+      "WebFetch(domain:hudsonthames.org)",
+      "WebFetch(domain:www.davidhbailey.com)",
+      "WebFetch(domain:am.jpmorgan.com)",
+      "WebFetch(domain:papers.ssrn.com)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:www.quantbeckman.com)",
+      "Bash(tasklist:*)",
+      "Bash(kill 1232)",
+      "Bash(taskkill /F /IM python.exe)",
+      "Bash(taskkill //F //IM python.exe)",
+      "Bash(ls:*)",
+      "Bash(kill 1297)",
+      "Bash(kill -9 1297)",
+      "Bash(xargs kill:*)"
+    ]
+  }
+}

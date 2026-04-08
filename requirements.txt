@@ -1,0 +1,27 @@
+# Stock Bot Dependencies
+# Install with: pip install -r requirements.txt
+
+# Price data
+yfinance>=0.2.31
+
+# Sentiment analysis
+vaderSentiment>=3.3.2
+
+# Data handling
+pandas>=2.0.0
+numpy>=1.24.0
+
+# HTTP requests (for news API)
+requests>=2.31.0
+
+# Brokerage API (for live/paper trading)
+alpaca-py>=0.21.0
+
+# Environment variable loading (.env file support)
+python-dotenv>=1.0.0
+
+# Charting (equity curve visualization)
+matplotlib>=3.7.0
+
+# Market calendar (holiday detection for live trading) — optional but recommended
+pandas-market-calendars>=4.0.0
