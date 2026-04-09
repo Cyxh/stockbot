@@ -31,6 +31,7 @@ import data_fetcher
 from strategy import generate_signal
 from backtester import run_backtest, plot_equity_curve
 from trader import Trader
+from report import generate_daily_report
 
 logging.basicConfig(
     level=getattr(logging, config.LOG_LEVEL),
@@ -182,6 +183,7 @@ def cmd_live():
     cooldown_symbols= {}   # symbol -> datetime when cooldown expires
     cached_news     = {}   # reuse news between scans (NewsAPI free = 100 req/day)
     last_news_fetch = None # datetime of last news fetch
+    report_sent_today = None  # date when today's report was sent
 
     while True:
         try:
@@ -209,6 +211,14 @@ def cmd_live():
             market_close = now.hour >= 16
 
             if not market_open or market_close:
+                # Generate daily report after market close (once per day)
+                if market_close and report_sent_today != now.date():
+                    try:
+                        generate_daily_report(trader)
+                        report_sent_today = now.date()
+                    except Exception as e:
+                        logger.error(f"Failed to generate report: {e}")
+
                 next_open  = _next_market_open(now)
                 sleep_secs = min((next_open - now).total_seconds(), scan_interval)
                 logger.info(f"Market closed ({now.strftime('%H:%M ET')}). "
