@@ -165,7 +165,8 @@ MAX_SECTOR_EXPOSURE_PCT = 0.40
 # =============================================================================
 # 730 calendar days ≈ 500 trading days — gives 12M momentum a full year of
 # firing history even after the 60-day warmup period.
-LOOKBACK_DAYS           = 730
+LOOKBACK_DAYS           = 730   # Used by backtest
+LIVE_LOOKBACK_DAYS      = 365   # Used by live mode (enough for 12M momentum + warmup)
 BACKTEST_STARTING_CASH  = 100_000
 
 # Cross-sectional rebalance frequency (trading days).

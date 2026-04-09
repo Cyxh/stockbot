@@ -180,6 +180,8 @@ def cmd_live():
 
     scan_interval   = 300  # 5 minutes
     cooldown_symbols= {}   # symbol -> datetime when cooldown expires
+    cached_news     = {}   # reuse news between scans (NewsAPI free = 100 req/day)
+    last_news_fetch = None # datetime of last news fetch
 
     while True:
         try:
@@ -216,8 +218,14 @@ def cmd_live():
 
             logger.info("Running market scan...")
 
-            all_prices = data_fetcher.fetch_all_price_data()
-            all_news   = data_fetcher.fetch_all_news()
+            live_days = getattr(config, "LIVE_LOOKBACK_DAYS", 365)
+            all_prices = data_fetcher.fetch_all_price_data(days=live_days)
+
+            # Refresh news at most once per hour (NewsAPI free tier = 100 req/day)
+            if last_news_fetch is None or (now - last_news_fetch).total_seconds() > 3600:
+                cached_news = data_fetcher.fetch_all_news()
+                last_news_fetch = now
+            all_news = cached_news
 
             trader.check_stop_loss_take_profit()
 
